@@ -2,6 +2,7 @@ require 'mechanize'
 require 'open-uri'
 require 'openssl'
 require 'nokogiri'
+require_relative 'database'
 
 cert_store = OpenSSL::X509::Store.new
 cert_store.add_file 'cacert.pem'
@@ -19,7 +20,8 @@ def scrape(asin_arr, agent)
     page = agent.get(website)
     title = page.at_xpath('//*[@id="productTitle"]').text.strip
     price = grab_price(page)
-    puts "#{title}: #{price}"
+    price_f = price.delete("$").to_f
+    add_price(asin, title, price, price_f, current_date)
     sleep(3)
   end
 end
@@ -41,6 +43,9 @@ def grab_price(webpage)
   end
 end
 
+def current_date
+  Time.new.strftime("%m/%d/%y")
+end
 
 # notes:
 # A price can either be:
@@ -50,4 +55,6 @@ end
 
 # DRIVER CODE
 # asin_arr = ["B0014DY7V0", "B005JRGH0G", "B01ABM71JY", "B00NFZ3W6G"]
-# scrape(asin_arr, a)
+# view_asins.each do |asin|
+#   scrape(asin, a)
+# end

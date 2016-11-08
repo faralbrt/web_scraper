@@ -32,6 +32,12 @@ def delete_asin(asin)
   $db.execute("DELETE FROM asins WHERE asin = ?", [asin])
 end
 
+def delete_mult_asins(asin_arr)
+  asin_arr.each do |asin|
+    delete_asin(asin)
+  end
+end
+
 def view_asins
   $db.execute("SELECT asin FROM asins ORDER BY asin ASC")
 end
@@ -76,3 +82,8 @@ $db.execute(create_prices_cmd)
 # puts search_by_asin("B0014DY7V0")
 # delete_asin_from_log("B0014DY7V0")
 # p view_prices
+
+# asin_arr = ["B0014DY7V0", "B005JRGH0G", "B01ABM71JY", "B00NFZ3W6G"]
+# asin_arr.each do |asin|
+#   add_asin(asin)
+# end
