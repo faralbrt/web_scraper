@@ -11,7 +11,7 @@ a = Mechanize.new { |agent|
   agent.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36"
 }
 
-asin_arr = ["B0014DY7V0", "B005JRGH0G", "B01ABM71JY", "B00NFZ3W6G"]
+
 
 def scrape(asin_arr, agent)
   asin_arr.each do |asin|
@@ -47,7 +47,7 @@ end
 #  1. Sale 
 #  2. Buybox if no sale
 #  3. First Price if no buybox
-//*[@id="result_0"]/div/div/div/div[2]/div[3]/div[1]/div[1]/div[2]/a/span[1]
 
 # DRIVER CODE
-scrape(asin_arr, a)
+# asin_arr = ["B0014DY7V0", "B005JRGH0G", "B01ABM71JY", "B00NFZ3W6G"]
+# scrape(asin_arr, a)
