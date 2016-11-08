@@ -11,44 +11,43 @@ a = Mechanize.new { |agent|
   agent.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36"
 }
 
-# asin = "B0014DY7V0"
+asin_arr = ["B0014DY7V0", "B005JRGH0G", "B01ABM71JY", "B00NFZ3W6G"]
 
-# website = 'https://www.amazon.com/dp/' + asin + '/'
-
-# page = a.get(website)
-
-# title = page.at_xpath('//*[@id="productTitle"]').text.strip
-# price = page.at_xpath('//*[@id="priceblock_saleprice"]').text
-# rank = page.at_xpath('//*[@id="SalesRank"]/text()[1]')
-
-# puts title + ":" + price
-
-def scrape(asin_arr, a)
+def scrape(asin_arr, agent)
   asin_arr.each do |asin|
     website = 'https://www.amazon.com/dp/' + asin + '/'
-    page = a.get(website)
+    page = agent.get(website)
     title = page.at_xpath('//*[@id="productTitle"]').text.strip
-    price = page.at_xpath('//*[@id="priceblock_saleprice"]').text
+    price = grab_price(page)
     puts "#{title}: #{price}"
     sleep(3)
   end
 end
 
-# scrape(['B0014DY7V0', 'B005V04DG6'], a)
+def grab_price(webpage)
+  xpath_arr = ['//*[@id="priceblock_saleprice"]', '//*[@id="snsPrice"]/div/span[2]', '//*[@id="priceblock_ourprice"]', '//*[@id="mbc"]/div[2]/div/span[2]/div/div[1]/span']
+  price = nil;
+  xpath_arr.each do |path|
+    if price
+      break
+    else
+      price = webpage.at_xpath(path)
+    end
+  end
+  if price
+    return price.text.strip
+  else
+    return "could not get price"
+  end
+end
 
-# def test(asin_arr, a)
-#   asin_arr.each do |asin|
-#     website = 'https://www.amazon.com/dp/' + asin + '/'
-#     page = a.get(website)
-#     title = page.at_xpath('//*[@id="productTitle"]').text.strip
-#     price = page.at_xpath('//*[@id="mbc"]/div[2]/div/span[2]/div/div[1]/span').text.strip
-#     puts "#{title}: #{price}"
-#     sleep(3)
-#   end
-# end
 
 # notes:
 # A price can either be:
 #  1. Sale 
 #  2. Buybox if no sale
 #  3. First Price if no buybox
+//*[@id="result_0"]/div/div/div/div[2]/div[3]/div[1]/div[1]/div[2]/a/span[1]
+
+# DRIVER CODE
+scrape(asin_arr, a)
