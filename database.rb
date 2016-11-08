@@ -38,11 +38,11 @@ end
 
 # METHODS FOR PRICES TABLE
 def add_price(asin, title, price_s, price_i, day)
-  $db.execute("INSERT INTO prices (asin, title, price_s, price_i, day) VALUES (?,?,?,?)", [asin, title, price_s, price_i, day])
+  $db.execute("INSERT INTO prices (asin, title, price_s, price_i, day) VALUES (?,?,?,?,?)", [asin, title, price_s, price_i, day])
 end
 
 def view_prices
-  $db.execute("SELECT * FROM prices ORDER BY date DESC, asin ASC")
+  $db.execute("SELECT * FROM prices ORDER BY day DESC, asin ASC")
 end
 
 def search_by_date(day)
@@ -53,7 +53,26 @@ def search_by_asin(asin)
   $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day DESC", [asin])
 end
 
+def delete_day(day)
+  $db.execute("DELETE FROM prices WHERE day = ?", [day])
+end
+
+def delete_asin_from_log(asin)
+  $db.execute("DELETE FROM prices WHERE asin = ?", [asin])
+end
+
 
 # DRIVER CODE
 $db.execute(create_asins_cmd)
 $db.execute(create_prices_cmd)
+
+# add_price("B0014DY7V0", "Dial 4 pack - roger's", "$15.49", 15.49, "11/07/2016")
+# puts view_prices
+# puts "_________________________________________________"
+# puts "Search by date"
+# puts search_by_date("11/08/2016")
+# puts "__________________________________________________"
+# puts "Search by asin"
+# puts search_by_asin("B0014DY7V0")
+# delete_asin_from_log("B0014DY7V0")
+# p view_prices
