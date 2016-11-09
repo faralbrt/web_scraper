@@ -54,7 +54,7 @@ def view_prices
 end
 
 # returns date as integer for sorting
-def last_date_i
+def last_day_i
   last_date = $db.execute("SELECT day_i FROM prices ORDER BY day_i DESC LIMIT 1")
   last_date = last_date[0][0]
   return last_date
@@ -92,11 +92,12 @@ end
 $db.execute(create_asins_cmd)
 $db.execute(create_prices_cmd)
 
-# add_price("B0014DY7V0", "Dial 4 pack - green", "$15.49", 15.49, "11/05/16")
+# add_price("B0014DY7V0", "eBags Slim Packing Cubes - 3pc Set", "$23.99", 23.99, "1/5/17", 170105)
+# add_price("B0014DY750", "Dial 4 pack - green", "$15.49", 15.49, "1/5/17", 170105)
 # puts view_prices
 # puts "_________________________________________________"
 # puts "Search by date"
-# puts search_by_date("11/08/2016")
+# puts search_by_date(last_date_s)
 # puts "__________________________________________________"
 # puts "Search by asin"
 # puts search_by_asin("B0014DY7V0")
