@@ -22,7 +22,7 @@ def scrape(asin_arr, agent)
     price = grab_price(page)
     price_f = price.delete("$").to_f
     add_price(asin, title, price, price_f, current_date)
-    sleep(3)
+    sleep(rand(6.5))
   end
 end
 
@@ -39,12 +39,20 @@ def grab_price(webpage)
   if price
     return price.text.strip
   else
-    return "could not get price"
+    return "can't grab price"
   end
 end
 
 def current_date
   Time.new.strftime("%m/%d/%y")
+end
+
+def current_hour
+  Time.new.hour
+end
+
+def current_date_i
+  Time.new.strftime("%y%m%d").to_i
 end
 
 # notes:
@@ -54,7 +62,11 @@ end
 #  3. First Price if no buybox
 
 # DRIVER CODE
-# asin_arr = ["B0014DY7V0", "B005JRGH0G", "B01ABM71JY", "B00NFZ3W6G"]
-# view_asins.each do |asin|
-#   scrape(asin, a)
+# loop do
+#   if last_date < current_date && (current_hour>= 0 && current_hour<= 5)
+#     view_asins.each do |asin_arr|
+#       scrape(asin_arr, a)
+#     end
+#   end
+#   sleep(10,800)
 # end

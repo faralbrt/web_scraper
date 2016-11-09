@@ -51,6 +51,13 @@ def view_prices
   $db.execute("SELECT * FROM prices ORDER BY day DESC, asin ASC")
 end
 
+def last_date
+  last_date = $db.execute("SELECT day FROM prices ORDER BY day DESC LIMIT 1")
+  last_date = last_date[0][0].split('/')
+  last_date = "#{last_date[2]}#{last_date[0]}#{last_date[1]}".to_i
+  return last_date
+end
+
 def search_by_date(day)
   $db.execute("SELECT * FROM prices WHERE day=? ORDER BY asin ASC", [day])
 end
@@ -72,7 +79,7 @@ end
 $db.execute(create_asins_cmd)
 $db.execute(create_prices_cmd)
 
-# add_price("B0014DY7V0", "Dial 4 pack - roger's", "$15.49", 15.49, "11/07/2016")
+# add_price("B0014DY7V0", "Dial 4 pack - roger's", "$15.49", 15.49, "11/09/16")
 # puts view_prices
 # puts "_________________________________________________"
 # puts "Search by date"
@@ -82,7 +89,8 @@ $db.execute(create_prices_cmd)
 # puts search_by_asin("B0014DY7V0")
 # delete_asin_from_log("B0014DY7V0")
 # p view_prices
-
+# delete_asin("B0014DY7V0")
+# p view_asins
 # asin_arr = ["B0014DY7V0", "B005JRGH0G", "B01ABM71JY", "B00NFZ3W6G"]
 # asin_arr.each do |asin|
 #   add_asin(asin)
