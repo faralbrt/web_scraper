@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/reloader'
 require_relative 'webscraper'
 require_relative 'database'
 

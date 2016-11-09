@@ -21,7 +21,7 @@ def scrape(asin_arr, agent)
     title = page.at_xpath('//*[@id="productTitle"]').text.strip
     price = grab_price(page)
     price_f = price.delete("$").to_f
-    add_price(asin, title, price, price_f, current_date)
+    add_price(asin, title, price, price_f, current_date, current_date_i)
     sleep(rand(6.5))
   end
 end
@@ -62,11 +62,11 @@ end
 #  3. First Price if no buybox
 
 # DRIVER CODE
-# loop do
-#   if last_date < current_date && (current_hour>= 0 && current_hour<= 5)
-#     view_asins.each do |asin_arr|
-#       scrape(asin_arr, a)
-#     end
-#   end
-#   sleep(10,800)
-# end
+loop do
+  if last_date_i < current_date_i && (current_hour>= 0 && current_hour<= 5)
+    view_asins.each do |asin_arr|
+      scrape(asin_arr, a)
+    end
+  end
+  sleep(10,800)
+end
