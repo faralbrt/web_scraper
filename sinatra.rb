@@ -6,5 +6,9 @@ get '/' do
   erb :index
 end
 
+get '/:asin' do
+  @asin = params[:asin]
+  erb :asin
+end
 
 

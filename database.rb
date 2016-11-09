@@ -48,9 +48,10 @@ def add_price(asin, title, price_s, price_i, day)
 end
 
 def view_prices
-  $db.execute("SELECT * FROM prices ORDER BY day DESC, asin ASC")
+  $db.execute("SELECT * FROM prices ORDER BY day DESC, title ASC")
 end
 
+# returns date as integer for sorting
 def last_date
   last_date = $db.execute("SELECT day FROM prices ORDER BY day DESC LIMIT 1")
   last_date = last_date[0][0].split('/')
@@ -58,12 +59,23 @@ def last_date
   return last_date
 end
 
+# returns date as a string
+def last_date_s
+  last_date = $db.execute("SELECT day FROM prices ORDER BY day DESC LIMIT 1")
+  last_date = last_date[0][0]
+  return last_date
+end
+
 def search_by_date(day)
-  $db.execute("SELECT * FROM prices WHERE day=? ORDER BY asin ASC", [day])
+  $db.execute("SELECT * FROM prices WHERE day=? ORDER BY title ASC", [day])
 end
 
 def search_by_asin(asin)
   $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day DESC", [asin])
+end
+
+def search_by_asin_one(asin)
+  $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day DESC LIMIT 1", [asin])
 end
 
 def delete_day(day)
@@ -79,7 +91,7 @@ end
 $db.execute(create_asins_cmd)
 $db.execute(create_prices_cmd)
 
-# add_price("B0014DY7V0", "Dial 4 pack - roger's", "$15.49", 15.49, "11/09/16")
+# add_price("B0014DY7V0", "Dial 4 pack - green", "$15.49", 15.49, "11/05/16")
 # puts view_prices
 # puts "_________________________________________________"
 # puts "Search by date"
