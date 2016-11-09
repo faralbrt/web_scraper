@@ -62,11 +62,11 @@ end
 #  3. First Price if no buybox
 
 # DRIVER CODE
-loop do
-  if last_date_i < current_date_i && (current_hour>= 0 && current_hour<= 5)
-    view_asins.each do |asin_arr|
-      scrape(asin_arr, a)
-    end
-  end
-  sleep(10,800)
-end
+# loop do
+#   if last_date_i < current_date_i && (current_hour>= 0 && current_hour<= 5)
+#     view_asins.each do |asin_arr|
+#       scrape(asin_arr, a)
+#     end
+#   end
+#   sleep(10,800)
+# end

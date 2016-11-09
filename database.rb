@@ -19,7 +19,9 @@ create_prices_cmd = <<-SQL
     title VARCHAR(255),
     price_s VARCHAR(255),
     price_i REAL,
-    day DATE
+    day DATE,
+    day_i INT,
+    cost INT
     )
 SQL
 
@@ -43,25 +45,24 @@ def view_asins
 end
 
 # METHODS FOR PRICES TABLE
-def add_price(asin, title, price_s, price_i, day)
-  $db.execute("INSERT INTO prices (asin, title, price_s, price_i, day) VALUES (?,?,?,?,?)", [asin, title, price_s, price_i, day])
+def add_price(asin, title, price_s, price_i, day, day_i)
+  $db.execute("INSERT INTO prices (asin, title, price_s, price_i, day, day_i) VALUES (?,?,?,?,?,?)", [asin, title, price_s, price_i, day, day_i])
 end
 
 def view_prices
-  $db.execute("SELECT * FROM prices ORDER BY day DESC, title ASC")
+  $db.execute("SELECT * FROM prices ORDER BY day_i DESC, title ASC")
 end
 
 # returns date as integer for sorting
-def last_date
-  last_date = $db.execute("SELECT day FROM prices ORDER BY day DESC LIMIT 1")
-  last_date = last_date[0][0].split('/')
-  last_date = "#{last_date[2]}#{last_date[0]}#{last_date[1]}".to_i
+def last_date_i
+  last_date = $db.execute("SELECT day_i FROM prices ORDER BY day_i DESC LIMIT 1")
+  last_date = last_date[0][0]
   return last_date
 end
 
 # returns date as a string
 def last_date_s
-  last_date = $db.execute("SELECT day FROM prices ORDER BY day DESC LIMIT 1")
+  last_date = $db.execute("SELECT day FROM prices ORDER BY day_i DESC LIMIT 1")
   last_date = last_date[0][0]
   return last_date
 end
@@ -71,11 +72,11 @@ def search_by_date(day)
 end
 
 def search_by_asin(asin)
-  $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day DESC", [asin])
+  $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day_i DESC", [asin])
 end
 
 def search_by_asin_one(asin)
-  $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day DESC LIMIT 1", [asin])
+  $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day_i DESC LIMIT 1", [asin])
 end
 
 def delete_day(day)
