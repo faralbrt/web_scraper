@@ -1,6 +1,3 @@
-    .container-fluid {
-      padding: 0px;
-    }
     nav {
       display: block;
     }
@@ -30,16 +27,6 @@
       text-decoration: none;
       color: black;
     }
-    .active {
-      background-color: lightblue;
-    }
-    .container {
-      margin-top: 100px;
-    }
-    .form-search {
-      float: right;
-      margin-bottom: 30px;
-    }
     h1 {
       width: 50%;
       margin:auto;
@@ -59,4 +46,17 @@
     td a:visited {
       text-decoration: none;
       color: black;
+    }
+    .container-fluid {
+      padding: 0px;
+    }
+    .active {
+      background-color: lightblue;
+    }
+    .container {
+      margin-top: 100px;
+    }
+    .form-search {
+      float: right;
+      margin-bottom: 30px;
     }

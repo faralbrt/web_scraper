@@ -26,8 +26,8 @@ post '/addasin' do
   one_asin = params["one_asin"]
   @mult_asins = params["mult_asins"]
   if one_asin.nil? == false
-    if one_asin.empty? == false
-      add_asin(one_asin.strip)
+    if one_asin.strip.length == 10
+      add_asin(one_asin.strip.upcase)
       @success_asin = true
     end
   elsif @mult_asins.nil? == false

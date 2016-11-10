@@ -26,12 +26,12 @@
       background-color: grey;
       text-decoration: none;
       color: black;
+    }
     h1 {
       text-align: center;
     }
     textarea {
       width: 90%;
-    }
     }
     .active {
       background-color: lightblue;
@@ -40,10 +40,10 @@
       padding-top: 100px;
       background-color: white;
       height: 1000px;
+    }
      .container-fluid {
       padding: 0px;
       background-color: #a4b0c4;
-    }
     }
    .success-asin {
       width: 200px;

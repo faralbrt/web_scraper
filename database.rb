@@ -33,7 +33,10 @@ end
 def add_multiple_asins(str)
   arr = str.split(',')
   arr.each do |asin|
-    add_asin(asin.strip)
+    asin = asin.strip.upcase
+    if asin.length == 10
+      add_asin(asin.strip)
+    end
   end
 end
 
