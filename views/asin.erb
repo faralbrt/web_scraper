@@ -5,6 +5,13 @@
   <meta charset="utf-8">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <style type="text/css">
+  #chartContainer {
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    width: 50%;
+  }
   .container-fluid {
       padding: 0px;
     }
@@ -61,8 +68,36 @@
       color: black;
     }
   </style>
+  <script type="text/javascript" src="http://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="http://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script type="text/javascript">
+$(function () {
+  //Better to construct options first and then pass it as a parameter
+  var options = {
+    title: {
+      text: "History"
+    },
+                animationEnabled: true,
+    data: [
+    {
+      type: "spline", //change it to line, area, column, pie, etc
+      dataPoints: [
+      <% search_by_asin(@asin).each do |log|%>
+        { x: <%= log[6] / 10000.00 %>, y: <%= log[4] %> },
+        <% end %>
+      ]
+    }
+    ]
+  };
+
+  $("#chartContainer").CanvasJSChart(options);
+
+});
+</script>
+</head>
 </head>
 <body>
+  <div id="chartContainer"></div>
   <div class= "container-fluid">
     <nav>
       <ul>

@@ -97,7 +97,7 @@
         <% search_by_date(last_date_s).each do |log|%>
           <tr>
             <td><strong><%= log[5] %></strong></td>
-            <td><a href= "<%= log[1] %>"><%= log[1] %></a></td>
+            <td><a href= "<%= "history/" + log[1] %>"><%= log[1] %></a></td>
             <td><a href="<%= "https://www.amazon.com/dp/" + log[1] + "/"%>"><%= log[2] %></a></td>
             <td style = "font-size: 16px;"><strong><%= log[3] %></strong></td>
           </tr>
