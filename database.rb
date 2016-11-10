@@ -30,6 +30,13 @@ def add_asin(asin)
   $db.execute("INSERT INTO asins (asin) VALUES (?)", [asin])
 end
 
+def add_multiple_asins(str)
+  arr = str.split(',')
+  arr.each do |asin|
+    add_asin(asin.strip)
+  end
+end
+
 def delete_asin(asin)
   $db.execute("DELETE FROM asins WHERE asin = ?", [asin])
 end

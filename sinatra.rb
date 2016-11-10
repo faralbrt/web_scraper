@@ -21,15 +21,16 @@ get '/deleteasin' do
 end
 
 post '/addasin' do
-  @one_asin = params["one_asin"]
+  one_asin = params["one_asin"]
   @mult_asins = params["mult_asins"]
-  if @one_asin.nil? == false
-    if @one_asin.empty? == false
-      
+  if one_asin.nil? == false
+    if one_asin.empty? == false
+      add_asin(one_asin.strip)
       @success_asin = true
     end
   elsif @mult_asins.nil? == false
     if @mult_asins.empty? == false
+      add_multiple_asins(@mult_asins)
       @success_mult_asins = true
     end
   end
