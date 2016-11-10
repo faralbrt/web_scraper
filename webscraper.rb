@@ -70,3 +70,15 @@ end
 #   end
 #   sleep(10,800)
 # end
+
+# begin
+#   a.gto("Im not black")
+# rescue Mechanize::ResponseCodeError
+#   begin
+#     a.get("https://amazon.com/dp/B12345")
+#   rescue
+#     puts "Could not find the page."
+#   end
+# rescue
+#   puts "Some other error occurred."
+# end

@@ -3,6 +3,8 @@ require 'sinatra/reloader'
 require_relative 'webscraper'
 require_relative 'database'
 
+set :public_folder, File.dirname(__FILE__) + '/static'
+
 get '/' do
   erb :index
 end
