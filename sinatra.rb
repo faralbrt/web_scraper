@@ -11,9 +11,12 @@ end
 
 get '/history/:asin' do
   @asin = params[:asin]
-  erb :asin
+  if search_by_asin(@asin) != []
+    erb :asin
+  else
+    "No History for this ASIN"
+  end
 end
-
 get '/addasin' do
   erb :add_asin
 end

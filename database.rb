@@ -97,11 +97,16 @@ def delete_asin_from_log(asin)
   $db.execute("DELETE FROM prices WHERE asin = ?", [asin])
 end
 
+# JOIN methods
+def view_asins_titles
+  $db.execute("SELECT asins.asin, prices.title FROM asins LEFT JOIN prices ON asins.asin = prices.asin GROUP BY prices.asin")
+end
 
 # DRIVER CODE
 $db.execute(create_asins_cmd)
 $db.execute(create_prices_cmd)
 
+# add_asin("B0014DY7V0")
 # add_price("B0014DY7V0", "eBags Slim Packing Cubes - 3pc Set", "$23.99", 23.99, "1/5/17", 170105)
 # add_price("B0014DY750", "Dial 4 pack - green", "$15.49", 15.49, "1/5/17", 170105)
 # puts view_prices
