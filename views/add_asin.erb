@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add ASIN</title>
+  <meta charset="utf-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style type="text/css">
+     .container-fluid {
+      padding: 0px;
+      background-color: #a4b0c4;
+    }
+    nav {
+      display: block;
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      border: 1px solid #e7e7e7;
+      background-color: #f3f3f3;
+      overflow: hidden;
+    }
+    li {
+      float: left;
+      margin: auto;
+    }
+    li a {
+      display: block;
+      padding: 10px;
+      color: black;
+      text-decoration: none;
+    }
+    li a:hover {
+      background-color: grey;
+      text-decoration: none;
+      color: black;
+    }
+    .active {
+      background-color: lightblue;
+    }
+    .container {
+      padding-top: 100px;
+      background-color: white;
+      height: 1000px;
+    }
+    h1 {
+      text-align: center;
+    }
+    textarea {
+      width: 90%;
+    }
+   .success-asin {
+      width: 200px;
+      height: 50px;
+      overflow: hidden;
+      padding: 10px;
+    }
+    .checkmark {
+      height: 25px;
+      width: 25px;
+    }
+    .success-message{
+      display: inline;
+      font-weight: bold;
+    }
+    </style>
+</head>
+<body>
+  <div class = "container-fluid">
+    <nav>
+      <ul>
+        <li><a href="http://localhost:4567/">Home</a></li>
+        <li class="active"><a href="http://localhost:4567/addasin">Add ASIN</a></li>
+        <li><a href="http://localhost:4567/deleteasin">Remove ASIN</a></li>
+      </ul>
+    </nav>
+    <div class= "container">
+      <h3>Add one ASIN</h3>
+      <form class= "one-asin form-inline" action="/addasin" method="post">
+        <input type="text" name="one_asin" placeholder="ASIN here..."><br>
+        <input class= "btn btn-primary" type="submit" value="Add">
+      </form><br>
+      <% if @success_asin%>
+        <div class="success-asin">
+          <img class= "checkmark" src="http://cdn.playbuzz.com/cdn/6776f3e2-f247-4412-be1a-f0b5e1c0d8a4/0ce34617-ebcd-4188-8dc0-2b8eb071e769.png" alt="submitted successfullly">
+          <p class="success-message">ASIN submitted!</p>
+        </div>
+      <%end%>
+      <h3>Add Multiple ASIN's</h3>
+      <form class="mult-asins" action="/addasin" method="post">
+        <textarea rows="8" name="mult_asins" placeholder="Separate each ASIN with a comma..."></textarea>
+        <input class= "btn btn-primary"type="submit" value="Add ASINS">
+      </form>
+      <% if @success_mult_asins%>
+        <div class="success-asin">
+          <img class= "checkmark" src="http://cdn.playbuzz.com/cdn/6776f3e2-f247-4412-be1a-f0b5e1c0d8a4/0ce34617-ebcd-4188-8dc0-2b8eb071e769.png" alt="submitted successfullly">
+          <p class="success-message">ASIN's submitted!</p>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</body>
+</html>
