@@ -27,7 +27,10 @@ SQL
 
 # METHODS FOR asins table
 def add_asin(asin)
-  $db.execute("INSERT INTO asins (asin) VALUES (?)", [asin])
+  match = $db.execute("SELECT asin FROM asins WHERE asin = ?", [asin])
+  if match == []
+    $db.execute("INSERT INTO asins (asin) VALUES (?)", [asin])
+  end
 end
 
 def add_multiple_asins(str)
@@ -99,8 +102,17 @@ end
 
 # JOIN methods
 def view_asins_titles
-  $db.execute("SELECT asins.asin, prices.title FROM asins LEFT JOIN prices ON asins.asin = prices.asin")
+  list_of_asins = $db.execute("SELECT asin FROM asins")
+  list_of_asins.map do |asin|
+    title = $db.execute("SELECT title FROM prices WHERE asin=?", [asin])[0]
+    if title
+      asin << title[0]
+    else
+      asin << nil
+    end
+  end
 end
+
 # DRIVER CODE
 $db.execute(create_asins_cmd)
 $db.execute(create_prices_cmd)

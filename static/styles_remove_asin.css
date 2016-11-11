@@ -27,6 +27,10 @@
       text-decoration: none;
       color: black;
     }
+    p {
+      text-align: center;
+      font-family: helvetica;
+    }
     td a {
       display: inline-block;
       width: 100%;
@@ -41,15 +45,31 @@
     td a:visited {
       text-decoration: none;
       color: black;
+    }
      .container-fluid {
       padding: 0px;
-    }
-    .active {
-      background-color: lightblue;
+      background-color: #ba7376;
     }
     h1 {
       text-align: center;
     }
+    .active {
+      background-color: lightblue;
+    }
     .container {
-      margin-top: 100px;
+      padding-top: 100px;
+      background-color: white;
+    }
+    .table {
+      width: 70%;
+      margin: auto;
+    }
+    .glyphicon-trash {
+      color: #c90c15;
+      font-size: 20px;
+    }
+    .trash-button {
+      background-color: transparent;
+      box-shadow: none;
+      border: none;
     }

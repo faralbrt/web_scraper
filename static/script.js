@@ -4,4 +4,5 @@ $(document).ready(function() {
     }, function () {
     $(this).parent().css("background-color", "initial");
   });
+  $(".trash-button").parent().css("text-align", "center");
 });
