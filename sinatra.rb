@@ -5,8 +5,18 @@ require_relative 'database'
 
 set :public_folder, File.dirname(__FILE__) + '/static'
 
+Thread.new do
+    view_asins.each do |asin_arr|
+    scrape(asin_arr, a)
+  end
+end
+
 get '/' do
-  erb :index
+  begin
+    erb :index
+  rescue NoMethodError
+    "This page is empty"
+  end
 end
 
 get '/history/:asin' do

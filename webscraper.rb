@@ -16,13 +16,17 @@ a = Mechanize.new { |agent|
 
 def scrape(asin_arr, agent)
   asin_arr.each do |asin|
-    website = 'https://www.amazon.com/dp/' + asin + '/'
-    page = agent.get(website)
-    title = page.at_xpath('//*[@id="productTitle"]').text.strip
-    price = grab_price(page)
-    price_f = price.delete("$").to_f
-    add_price(asin, title, price, price_f, current_date, current_date_i)
-    sleep(rand(6.5))
+    begin
+      website = 'https://www.amazon.com/dp/' + asin + '/'
+      page = agent.get(website)
+      title = page.at_xpath('//*[@id="productTitle"]').text.strip
+      price = grab_price(page)
+      price_f = price.delete("$").to_f
+      add_price(asin, title, price, price_f, current_date, current_date_i)
+      sleep(rand(6.5))
+    rescue Mechanize::ResponseCodeError
+      add_price(asin, "error", "error", nil, current_date, current_date_i)
+    end
   end
 end
 
