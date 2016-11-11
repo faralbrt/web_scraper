@@ -99,9 +99,8 @@ end
 
 # JOIN methods
 def view_asins_titles
-  $db.execute("SELECT asins.asin, prices.title FROM asins LEFT JOIN prices ON asins.asin = prices.asin GROUP BY prices.asin")
+  $db.execute("SELECT asins.asin, prices.title FROM asins LEFT JOIN prices ON asins.asin = prices.asin")
 end
-
 # DRIVER CODE
 $db.execute(create_asins_cmd)
 $db.execute(create_prices_cmd)

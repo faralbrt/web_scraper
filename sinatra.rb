@@ -41,3 +41,9 @@ post '/addasin' do
   end
   erb :add_asin
 end
+
+post '/deleteasin' do
+  asin = params['asin_to_delete']
+  # delete_asin_from_log(asin)
+  erb :remove_asin
+end

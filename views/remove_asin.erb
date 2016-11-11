@@ -19,17 +19,17 @@
     </nav>
     <div class= "container">
       <h1>Remove an ASIN</h1>
-      <form>
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th class= "col-md-2" style= "overflow: hidden; width: auto;">ASIN</th>
-              <th class= "col-md-4" style= "overflow: hidden; width: auto;">TITLE</th>
-              <th class= "col-md-2" style= "overflow: hidden; width: auto;">DELETE</th>
-            </tr>
-          </thead>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th class= "col-md-2" style= "overflow: hidden; width: auto;">ASIN</th>
+            <th class= "col-md-4" style= "overflow: hidden; width: auto;">TITLE</th>
+            <th class= "col-md-2" style= "overflow: hidden; width: auto;">DELETE</th>
+          </tr>
+        </thead>
           <tbody>
             <% view_asins_titles.each do |row|%>
+            <form method="post" action="/deleteasin">
               <tr>
                 <td><a href= "<%= "history/" + row[0] %>"><%= row[0] %></a></td>
                 <td>
@@ -39,12 +39,13 @@
                     <%= "No title..." %>
                   <% end %>
                 </td>
-                <td>OK</td>
+                <input type="hidden" name="asin_to_delete" value="<%= row[0] %>">
+                <td><input type="submit"></td>
               </tr>
+            </form>
             <% end %>
           </tbody>
-        </table>
-      </form>
+      </table>
     </div>
   </div>
 </body>
