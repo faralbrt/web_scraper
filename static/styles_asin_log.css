@@ -47,6 +47,9 @@
       text-decoration: none;
       color: black;
     }
+    h3 {
+      float: left;
+    }
   .container-fluid {
       padding: 0px;
     }
@@ -59,4 +62,11 @@
     margin-right: auto;
     height: 300px;
     width: 50%;
+  }
+  #stats {
+    border: 3px groove black;
+    padding: 5px;
+    float: right;
+    color: darkgreen;
+    margin-bottom: 30px;
   }

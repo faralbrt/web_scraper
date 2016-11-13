@@ -25,7 +25,7 @@ def scrape(asin_arr, agent)
       add_price(asin, title, price, price_f, current_date, current_date_i)
       sleep(rand(6.5))
     rescue Mechanize::ResponseCodeError
-      add_price(asin, "error", "error", nil, current_date, current_date_i)
+      add_price_empty(asin, "error", "error", current_date, current_date_i)
     end
   end
 end

@@ -45,6 +45,11 @@ $(function () {
     </nav>
     <div class= "container">
       <h3><strong><%= search_by_asin_one(@asin)[0][2] %></strong></h3><br><br>
+      <div id="stats">
+        <h4>Min: $<%= asin_min(@asin) %></h4>
+        <h4>Max: $<%= asin_max(@asin) %></h4>
+        <h4>Avg: $<%= asin_avg(@asin) %></h4>
+      </div>
       <table class="table table-striped table-bordered">
         <thead>
           <tr>

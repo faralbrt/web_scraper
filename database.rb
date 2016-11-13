@@ -62,6 +62,11 @@ def add_price(asin, title, price_s, price_i, day, day_i)
   $db.execute("INSERT INTO prices (asin, title, price_s, price_i, day, day_i) VALUES (?,?,?,?,?,?)", [asin, title, price_s, price_i, day, day_i])
 end
 
+def add_price_empty(asin, title, price_s, day, day_i)
+  $db.execute("INSERT INTO prices (asin, title, price_s, day, day_i) VALUES (?,?,?,?,?)", [asin, title, price_s, day, day_i])
+end
+
+
 def view_prices
   $db.execute("SELECT * FROM prices ORDER BY day_i DESC, title ASC")
 end
@@ -86,6 +91,24 @@ end
 
 def search_by_asin(asin)
   $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day_i DESC", [asin])
+end
+
+def asin_max(asin)
+  arr = $db.execute("SELECT price_i, MAX(price_i) FROM prices WHERE asin= ?", [asin])
+  max = arr[0][0]
+  return max
+end
+
+def asin_min(asin)
+  arr = $db.execute("SELECT price_i, MIN(price_i) FROM prices WHERE asin= ?", [asin])
+  min = arr[0][0]
+  return min
+end
+
+def asin_avg(asin)
+  arr = $db.execute("SELECT price_i, MAX(price_i) FROM prices WHERE asin= ?", [asin])
+  avg = arr[0][0]
+  return avg
 end
 
 def search_by_asin_one(asin)
