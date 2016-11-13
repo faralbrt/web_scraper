@@ -5,11 +5,11 @@ require_relative 'database'
 
 set :public_folder, File.dirname(__FILE__) + '/static'
 
-Thread.new do
-    view_asins.each do |asin_arr|
-    scrape(asin_arr, a)
-  end
-end
+# Thread.new do
+#     view_asins.each do |asin_arr|
+#     scrape(asin_arr, $a)
+#   end
+# end
 
 get '/' do
   begin
