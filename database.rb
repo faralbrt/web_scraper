@@ -92,6 +92,11 @@ def search_by_asin_one(asin)
   $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day_i DESC LIMIT 1", [asin])
 end
 
+def search_by_title(str)
+  str = "%" + str + "%"
+  $db.execute("SELECT * FROM prices WHERE day=? AND title LIKE ? ORDER BY title ASC", [last_date_s, str])
+end
+
 def delete_day(day)
   $db.execute("DELETE FROM prices WHERE day = ?", [day])
 end

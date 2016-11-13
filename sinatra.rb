@@ -13,9 +13,14 @@ set :public_folder, File.dirname(__FILE__) + '/static'
 
 get '/' do
   begin
-    @search_date = last_date_s
-    if params['search'] && params['search'] != ""
-      @search_date = params['search'].chars
+    if params['search_title'] && params['search_title'] != ""
+      @search_title = params['search_title']
+    else
+      @search_title = nil
+      @search_date = last_date_s
+    end
+    if params['search_date'] && params['search_date'] != ""
+      @search_date = params['search_date'].chars
       @search_date.delete_at(6)
       @search_date.delete_at(6)
       @search_date = @search_date.join('')
