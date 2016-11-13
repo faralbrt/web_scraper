@@ -13,6 +13,13 @@ set :public_folder, File.dirname(__FILE__) + '/static'
 
 get '/' do
   begin
+    @search_date = last_date_s
+    if params['search'] && params['search'] != ""
+      @search_date = params['search'].chars
+      @search_date.delete_at(6)
+      @search_date.delete_at(6)
+      @search_date = @search_date.join('')
+    end
     erb :index
   rescue NoMethodError
     "This page is empty"
