@@ -143,3 +143,6 @@ end
 # B001E4GPVE,
 # B00N54KWJ2,
 # B00RU9IWRM,
+
+
+# add_price("B01DYPX52W", "pack of 14", "$15.00", 15.00, "11/13/16", 161113)

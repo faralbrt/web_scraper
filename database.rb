@@ -93,6 +93,25 @@ def search_by_asin(asin)
   $db.execute("SELECT * FROM prices WHERE asin= ? ORDER BY day_i DESC", [asin])
 end
 
+def search_by_asin_last_2(asin)
+  arr = $db.execute("SELECT price_i FROM prices WHERE asin= ? ORDER BY day_i DESC LIMIT 2", [asin])
+  last_two = []
+  last_two << arr[0][0]
+  if arr[1]
+    last_two << arr[1][0]
+  else
+    last_two << arr[0][0]
+  end
+  color = "initial";
+  result = last_two[0] / last_two[1]
+  if result > 1.049
+    color = "lightgreen"
+  elsif result < 0.95
+    color = "lightcoral"
+  end
+  return color
+end
+
 def asin_max(asin)
   arr = $db.execute("SELECT price_i, MAX(price_i) FROM prices WHERE asin= ?", [asin])
   max = arr[0][0]
