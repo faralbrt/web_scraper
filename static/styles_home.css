@@ -49,12 +49,16 @@
     }
     .container-fluid {
       padding: 0px;
+      background-color: lightslategray;
     }
     .active {
       background-color: lightblue;
     }
     .container {
-      margin-top: 100px;
+      padding-top: 100px;
+      padding-right: 50px;
+      padding-left: 50px;
+      background-color: white;
     }
     .form-search {
       float: right;
