@@ -106,11 +106,12 @@ def view_asins_titles
   list_of_asins.map do |asin|
     title = $db.execute("SELECT title FROM prices WHERE asin=?", [asin])[0]
     if title
-      asin << title[0]
+      asin.unshift(title[0])
     else
-      asin << nil
+      asin.unshift("No title...")
     end
   end
+  return list_of_asins.sort
 end
 
 # DRIVER CODE
