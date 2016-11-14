@@ -2,7 +2,7 @@ require 'sinatra'
 require_relative 'webscraper'
 
 set :public_folder, File.dirname(__FILE__) + '/static'
-class HelloWorldApp < Sinatra::Base
+# class HelloWorldApp < Sinatra::Base
 Thread.new do
   loop do
     if last_day_i < current_date_i && (current_hour>= 0 && current_hour<= 5)
@@ -74,4 +74,4 @@ post '/deleteasin' do
   delete_asin(asin)
   erb :remove_asin
 end
-end
+# end
