@@ -1,15 +1,20 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require_relative 'webscraper'
-require_relative 'database'
 
 set :public_folder, File.dirname(__FILE__) + '/static'
 
-# Thread.new do
-#     view_asins.each do |asin_arr|
-#     scrape(asin_arr, $a)
-#   end
-# end
+Thread.new do
+  loop do
+    if last_day_i < current_date_i && (current_hour>= 0 && current_hour<= 5)
+      view_asins.each do |asin_arr|
+        scrape(asin_arr, a)
+      end
+    end
+    sleep(10,800)
+  end
+
+end
 
 get '/' do
   begin

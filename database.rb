@@ -104,29 +104,29 @@ def search_by_asin_last_2(asin)
   end
   color = "initial";
   result = last_two[0] / last_two[1]
-  if result > 1.049
+  if result > 1.029
     color = "lightgreen"
-  elsif result < 0.95
+  elsif result < 0.971
     color = "lightcoral"
   end
   return color
 end
 
 def asin_max(asin)
-  arr = $db.execute("SELECT price_i, MAX(price_i) FROM prices WHERE asin= ?", [asin])
+  arr = $db.execute("SELECT MAX(price_i) FROM prices WHERE asin= ?", [asin])
   max = arr[0][0]
   return max
 end
 
 def asin_min(asin)
-  arr = $db.execute("SELECT price_i, MIN(price_i) FROM prices WHERE asin= ?", [asin])
+  arr = $db.execute("SELECT MIN(price_i) FROM prices WHERE asin= ?", [asin])
   min = arr[0][0]
   return min
 end
 
 def asin_avg(asin)
-  arr = $db.execute("SELECT price_i, MAX(price_i) FROM prices WHERE asin= ?", [asin])
-  avg = arr[0][0]
+  arr = $db.execute("SELECT AVG(price_i) FROM prices WHERE asin= ?", [asin])
+  avg = arr[0][0].round(2)
   return avg
 end
 
