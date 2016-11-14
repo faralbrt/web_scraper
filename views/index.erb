@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ASIN database</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="styles_home.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src= "script.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).on( "change", function() {
+      $( "#datepicker" ).datepicker( "option", "showAnim", "slide" );
+    });
+  } );
+  </script>
+</head>
+<body>
+  <div class="container-fluid">
+    <nav>
+      <ul>
+        <li class="active"><a href="http://localhost:4567/">Home</a></li>
+        <li><a href="http://localhost:4567/addasin">Add ASIN</a></li>
+        <li><a href="http://localhost:4567/deleteasin">Remove ASIN</a></li>
+      </ul>
+    </nav>
+    <div class= "container">
+      <form id="search_title_form">
+        <input id="search_title" type="text" name="search_title" placeholder="Search by title...">
+        <button type="submit" class="btn btn-inverse">Search</button>
+      </form>
+      <form class="form-search">
+        <input id="datepicker" class="input-medium" type="text" name="search_date" placeholder="Search by Date">
+        <button type="submit" class="btn btn-inverse">Search</button>
+      </form>
+      <h1>ASIN Database</h1><br>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th class= "col-md-2" style= "overflow: hidden; width: auto;">Date</th>
+            <th class= "col-md-2" style= "overflow: hidden; width: auto;">ASIN</th>
+            <th class= "col-md-4" style= "overflow: hidden; width: auto;">Title</th>
+            <th class= "col-md-2" style= "overflow: hidden; width: auto;">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @search_title %>
+            <% search_by_title(@search_title). each do |log| %>
+              <tr>
+                <td><strong><%= log[5] %></strong></td>
+                <td><a href= "<%= "history/" + log[1] %>"><%= log[1] %></a></td>
+                <td><a href="<%= 'https://www.amazon.com/gp/offer-listing/' + log[1] + '/ref=olp_f_primeEligible?ie=UTF8&f_new=true&f_primeEligible=true'%>"><%= log[2] %></a></td>
+                <td style = "font-size: 16px; background-color: <%=search_by_asin_last_2(log[1])%>;"><strong><%= log[3] %></strong></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <% search_by_date(@search_date).each do |log|%>
+              <tr>
+                <td><strong><%= log[5] %></strong></td>
+                <td><a href= "<%= "history/" + log[1] %>"><%= log[1] %></a></td>
+                <td><a href="<%= 'https://www.amazon.com/gp/offer-listing/' + log[1] + '/ref=olp_f_primeEligible?ie=UTF8&f_new=true&f_primeEligible=true'%>"><%= log[2] %></a></td>
+                <td style = "font-size: 16px; background-color: <%=search_by_asin_last_2(log[1])%>;"><strong><%= log[3] %></strong></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
