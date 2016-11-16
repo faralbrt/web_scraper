@@ -1,7 +1,4 @@
 require 'mechanize'
-require 'open-uri'
-require 'openssl'
-require 'nokogiri'
 require_relative 'database'
 
 cert_store = OpenSSL::X509::Store.new

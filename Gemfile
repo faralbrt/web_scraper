@@ -1,7 +1,4 @@
 source 'https://rubygems.org'
 gem 'sinatra'
 gem 'mechanize'
-gem 'open-uri'
-gem 'openssl'
-gem 'nokogiri'
 gem 'sqlite3'
